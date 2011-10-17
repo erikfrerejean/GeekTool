@@ -1,0 +1,6 @@
+#!/bin/bash
+
+for cal in "Home" "Pampus" "Work"
+do
+	osascript ~/.geektool/AppleScript/GetFirstEvent.scpt $cal
+done
