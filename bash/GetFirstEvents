@@ -2,5 +2,5 @@
 
 for cal in "Home" "Pampus" "Work"
 do
-	osascript ~/.geektool/AppleScript/GetFirstEvent.scpt $cal
+	osascript ~/.geektool/AppleScript/GetFirstEvent.scpt $cal  | sed 's/^/ /;s/$/[0m/;s/{HOME}/[1;33m/;s/{PAMPUS}/[1;32m/;s/{WORK}/[1;34m/g'
 done
