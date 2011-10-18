@@ -1,1 +1,1 @@
-date +%B
+date +%B | tr '[a-z]' '[A-Z]'

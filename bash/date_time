@@ -1,1 +1,1 @@
-date +%T
+date "+%l:%M %p"
