@@ -1,0 +1,26 @@
+#!/bin/bash
+
+function getInterfaceIP()
+{
+	iconf=$(ifconfig $1 | grep "inet " | grep -v 127.0.0.1 | awk ' { print $2 } ');
+
+	if [ "$iconf" != "" ]; then
+		echo $iconf;
+	else
+		echo "INACTIVE";
+	fi
+
+	return 0;
+}
+
+scutil --get ComputerName;
+sw_vers | awk -F':\t' '{ print $2 }' | paste -d ' ' - - -;
+sysctl -n machdep.cpu.brand_string;
+sysctl -n hw.memsize | awk '{ print $0/1073741824" GB RAM" }';
+df -Hl | grep disk2 | awk '{ print $1" " $2 "B" }';
+df -Hl | grep "Macintosh HD 2" | awk '{ print $1" " $2 "B" }';
+
+# Network info
+printf "%-11s %s%s%s%s\n" "Ethernet:" "[0;31m" $(getInterfaceIP "en0") "[0m";
+printf "%-11s %s%s%s%s\n" "Airport:" "[0;31m" $(getInterfaceIP "en1") "[0m";
+printf "%-11s %s%s%s%s\n" "External:" "[0;31m" $(curl --silent http://checkip.dyndns.org | awk '{ print $6 } ' | cut -f 1 -d "<") "[0m";
