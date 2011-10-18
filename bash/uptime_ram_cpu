@@ -1,7 +1,11 @@
 #!/bin/sh
+sep="\n"
 
 up=$(uptime | awk ' { print $3 " days " $5 } ' | sed 's/,//;s/:/h /;s/$/min/g');
 ram=$(top -l1 | awk '/PhysMem/ { print $8 } ');
 idle=$(top -l2 | awk  '/CPU usage:/ && NR > 8 { print $7 " " $8 } ');
 
-echo "Uptime |[0;31m $up\t\t[0mRAM |[0;31m $ram\t\t[0mCPU |[0;31m $idle[0m"
+#echo "Uptime |[0;31m $up$sep[0mRAM |[0;31m $ram$sep[0mCPU |[0;31m $idle[0m"
+printf "%-8s%s$sep" "Uptime" "[0;31m$up[0m"
+printf "%-8s%s$sep" "RAM" "[0;31m$ram[0m"
+printf "%-8s%s$sep" "CPU" "[0;31m$idle[0m"
