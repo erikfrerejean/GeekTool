@@ -1,0 +1,8 @@
+#!/bin/bash
+proccnt=10
+
+# Hard coded header
+printf "[1;36m%-6s %-16s %-4s %-8s %-6s %-13s[0m\n" "PID" "COMMAND" "%CPU" "TIME" "RSIZE" "USER"
+
+# Build the list
+top -F -l 2 -o rsize -stats pid,command,cpu,time,rsize,user | grep '^....[1234567890|PID] ' | grep -v ' 0.0% ..:' | sed "1 d" | head -n $proccnt
