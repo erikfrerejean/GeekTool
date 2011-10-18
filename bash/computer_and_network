@@ -21,6 +21,6 @@ df -Hl | grep disk2 | awk '{ print $1" " $2 "B" }';
 df -Hl | grep "Macintosh HD 2" | awk '{ print $1" " $2 "B" }';
 
 # Network info
-printf "%-11s %s%s%s%s\n" "Ethernet:" "[0;31m" $(getInterfaceIP "en0") "[0m";
-printf "%-11s %s%s%s%s\n" "Airport:" "[0;31m" $(getInterfaceIP "en1") "[0m";
-printf "%-11s %s%s%s%s\n" "External:" "[0;31m" $(curl --silent http://checkip.dyndns.org | awk '{ print $6 } ' | cut -f 1 -d "<") "[0m";
+printf "%-10s%s%s%s\n" "Ethernet" "[0;31m" $(getInterfaceIP "en0") "[0m";
+printf "%-10s%s%s%s\n" "Airport" "[0;31m" $(getInterfaceIP "en1") "[0m";
+printf "%-10s%s%s%s\n" "External" "[0;31m" $(curl --silent http://checkip.dyndns.org | awk '{ print $6 } ' | cut -f 1 -d "<") "[0m";
