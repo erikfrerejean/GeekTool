@@ -1,7 +1,7 @@
 #!/bin/sh
 sep="\n"
 
-up=$(uptime | awk ' { print $3 " days " $5 } ' | sed 's/,//;s/:/h /;s/$/min/g');
+up=$(uptime | awk ' { if ($5 == "users,") { print $3 } else { print $3 " days " $5 } }' | sed 's/,//;s/:/h /;s/$/min/g');
 ram=$(top -l1 | awk '/PhysMem/ { print $10 } ');
 idle=$(top -l2 | awk  '/CPU usage:/ && NR > 8 { print $7 " " $8 } ');
 
